@@ -1,0 +1,66 @@
+<form class="form" [formGroup]="playerForm" (ngSubmit)="start()">
+    <div class="row justify-content-center mb-5">
+        <div class="col-xl-8">
+            <div class="card">
+                <div class="card-header text-center bg-danger text-white">
+                    {{"TEXT.PLAYER_ONE" | translate}} ({{"SYMBOL.X" | translate}})
+                </div>
+                <div class="card-body">
+                    <div formGroupName="player1">
+                        <div class="form-group row">
+                            <label for="player1" class="col-xl-3 col-lg-3 col-form-label">
+                                {{'TEXT.NAME' | translate}}
+                            </label>
+                            <div class="col-xl-9 col-lg-9">
+                                <input type="text" id="player1" class="form-control" formControlName="name">
+                                <ng-container *ngIf="!playerForm.valid">
+                                      <span class="text-danger" *ngIf="playerForm.get('player1')!.get('name')!.hasError('required') &&
+                                                                       (playerForm.get('player1')!.get('name')!.dirty ||
+                                                                        playerForm.get('player1')!.get('name')!.touched)">
+                                          {{"VALIDATOR.REQUIRED" | translate}}
+                                      </span>
+                                      <span *ngIf="playerForm.get('player1')!.get('name')!.hasError('minlength')"
+                                            class="text-danger">
+                                          {{"VALIDATOR.NAME_MIN_LENGTH" | translate}}
+                                      </span>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="card">
+                <div class="card-header text-center bg-primary text-white">
+                    {{"TEXT.PLAYER_TWO" | translate}} ({{"SYMBOL.O" | translate}})
+                </div>
+                <div class="card-body">
+                    <div formGroupName="player2">
+                        <div class="form-group row">
+                            <label for="player2" class="col-xl-3 col-lg-3 col-form-label">
+                                {{'TEXT.NAME' | translate}}
+                            </label>
+                            <div class="col-xl-9 col-lg-9">
+                                <input type="text" id="player2" class="form-control" formControlName="name">
+                                <ng-container *ngIf="!playerForm.valid">
+                                    <span class="text-danger" *ngIf="playerForm.get('player2')!.get('name')!.hasError('required') &&
+                                                                     (playerForm.get('player2')!.get('name')!.dirty ||
+                                                                      playerForm.get('player2')!.get('name')!.touched)" >
+                                        {{"VALIDATOR.REQUIRED" | translate}}
+                                    </span>
+                                    <span *ngIf="playerForm.get('player2')!.get('name')!.hasError('minlength')"
+                                          class="text-danger">
+                                        {{"VALIDATOR.NAME_MIN_LENGTH" | translate}}
+                                    </span>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <button type="submit" class="btn btn-success" [disabled]="!playerForm.valid">{{"TEXT.START_GAME" | translate}}</button>
+    </div>
+</form>
